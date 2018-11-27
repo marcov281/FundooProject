@@ -1,0 +1,63 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.card_note {
+  width: 300px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.card_note:hover .action {
+  opacity: 1;
+}
+
+.action {
+  opacity: 0;
+  ;
+}
+
+.card_note:hover .pin {
+  display: block;
+}
+
+.pin {
+  opacity: 0;
+}
+
+
+@media only screen and (max-width: 320px) {
+  .card_note {
+    @include card_note(0px, 315px)
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .card_note {
+    @include card_note(0px, 365px)
+  }
+}
+
+@media only screen and (max-width: 411px) {
+  .card_note {
+    @include card_note(0px, 405px)
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .card_note {
+    @include card_note(0px, 410px)
+  }
+}
+
+.wrap {
+  @include wrap;
+}
+
+.maindiv {
+  margin-top: 6%
+}
+
+.maTCard {
+  margin: 1%;
+  height: min-content;
+}

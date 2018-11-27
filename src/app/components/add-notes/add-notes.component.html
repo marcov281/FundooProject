@@ -1,0 +1,182 @@
+<div *ngIf="col==false">
+  <!--- this is the card that will come first in notes to add new notes- -->
+  <mat-card class="matcard matcard2" *ngIf="note1" >
+    <div data-text="Take a note..." contenteditable="true" class="div2" (click)="note1=!note1">
+    </div>
+
+    <span class="span">
+      <button mat-icon-button matTooltip="list">
+      <i class="material-icons icons"  (click)="changetolist();note1=false">list</i>
+      </button>
+
+      <button mat-icon-button matTooltip="photo">
+        <i class="material-icons icons"  >photo</i>
+      </button>
+
+      <button mat-icon-button matTooltip="edit">
+        <i class="material-icons icons" >edit</i>
+      </button>
+
+    </span>
+  </mat-card>
+  <!-- this is the end of the 1st view of the add note -->
+</div>
+<!-- this is the card to add note with various option  -->
+<div *ngIf="col==false">
+<mat-card class="matcard matcard2" *ngIf="!note1" 
+[ngStyle]="{'background-color': color}">
+
+  <!-- this is the header to add title and pin -->
+<mat-card-header>
+<div data-text="Title" #title contenteditable="true" class="div4" [innerHTML]="tempTitle">
+</div>
+<span>
+  <button mat-icon-button matTooltip="Pin note" (click)="pincolor()" *ngIf="ispined==false">
+    <img src="../../../assets/icons/pin.svg" />
+  </button>
+  <button mat-icon-button matTooltip="Unpin note" (click)="pincolor()" *ngIf="ispined==true">
+    <img src="../../../assets/icons/bluepin.svg" />
+  </button>
+</span>
+</mat-card-header>
+
+<!-- this is to add the description in the note -->
+<mat-card-content class="take_note" *ngIf="check==false">
+<div data-text="Take a note.." #description contenteditable="true" class="div4" [innerHTML]="tempDescription">
+</div>
+
+</mat-card-content>
+<!-- this is to add checkbox start -->
+<mat-card-content class="take_note" *ngIf="check==true">
+  <div *ngFor="let myval of listarray ; let i=index" fxLayout="row">
+    <div fxFlex=5%>
+      <mat-checkbox (click)="checkbox(myval)"></mat-checkbox>
+    </div>
+    <div fxFlex=80%><input class="input2" [(ngModel)]="myval.value" type="text" /></div>
+    <div fxFlex=5%>
+      <mat-icon class="matICON" (click)="clearAdded(myval)">clear</mat-icon>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div fxLayout="row" class=input2>
+    <div fxFlex=5%><i class="material-icons"> add</i> </div>
+    <div fxFlex=80%><input class="input2" placeholder="List item" type="text"
+    [(ngModel)]="listval" (keydown)="onKeydown($event);" /></div>
+    <div fxFlex=5%>
+      <mat-icon class="matICON">clear</mat-icon>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+
+</mat-card-content>
+<!-- this is to add checkbox end -->
+<!-- this is to add label as a chip -->
+<mat-chip-list #chipList fxLayout="row" class="wrap" fxLayoutAlign="start center">
+  <div *ngFor="let label of temp">
+    <mat-chip class="wrap">
+      {{label.label}}
+      <mat-icon matChipRemove (click)="removeChip(label)">cancel</mat-icon>
+    </mat-chip>
+  </div>
+  <div *ngFor="let col of collaboratorList">
+    <button mat-mini-fab class="mini-fab">{{col.email | titlecase | slice:0:1}}</button>
+  </div>
+</mat-chip-list>
+
+<br>
+<mat-chip-list #chipList fxLayout="row" class="wrap" fxLayoutAlign="start center" *ngIf="dateTime!=undefined || dateTime!=null">
+      <mat-chip class="wrap">
+        {{dateTime | date:"medium"}}
+        <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
+      </mat-chip>
+  </mat-chip-list>
+
+<!-- this is the different option available to perform in the notes -->
+<mat-card-actions class="action" fxLayoutAlign="space-between center">
+
+<app-remindme (sendToAdd)="getDate($event)"></app-remindme>
+
+<button mat-icon-button matTooltip="profile" (click)="col=true;addTitle()">
+  <i class="material-icons icons" > person_add </i>
+</button>
+
+<app-theme (colorChange)="chamgeColor($event)"></app-theme>
+
+<button mat-icon-button matTooltip="photo">
+  <i class="material-icons icons" >photo</i>
+</button>
+
+<button mat-icon-button matTooltip="archive">
+  <img src="../../../assets/icons/archive.svg" class="svg_img"  />
+</button>
+
+<app-more (updateLabel)="updatelabel($event);" (changeBox)="goToDes()"></app-more>
+
+
+<button mat-button class="butt2" (click)="note1=true;check=false;postValue()"
+ matTooltip="close">Close</button>
+</mat-card-actions>
+
+</mat-card>
+</div>
+<!-- /////////////////////////////////////////////////////////////////////////////// --> 
+<!-- //////////////////////////////////////////////////////////////////////////////////////// -->
+<mat-card class="colcard matcard" *ngIf="col==true">
+  <mat-card-header class="header">
+    Collaborators
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="content" fxLayout="column" fxLayoutAlign="space-evenly start" fxLayoutGap="8px">
+    <div fxFlex="45%" fxLayout="row" fxLayoutAlign="space-evenly start" class="button1">
+      <div fxFlex="10"><button mat-mini-fab class="mini-fab" [ngStyle]="{'background-image':
+      'url(' +imagePath+ ')','background-size':'cover'}"
+          disabled></button></div>
+      <div fxFlex="90" fxLayout="column">
+        <div fxflex="45%" class="textPrint">{{name}}</div>
+        <div fxflex="45%" class="textPrint mailId">{{mail}}</div>
+      </div>
+    </div>
+
+    <div style="width: 95%" fxLayout="row" *ngFor="let data of colList ">
+        <div fxFlex="10%" fxLayoutAlign="start center">
+            <button mat-mini-fab class="mini-fab" >{{data.letter}}</button>
+        </div>
+        <div fxFlex="2%"></div>
+        <div fxFlex="78%" fxLayoutAlign="start center" class="inputDiv">
+            <span>{{data.userobj.email}}</span>
+        </div>
+        <div fxFlex="10%" fxLayoutAlign="end center">
+            <i class="material-icons icon" (click)="removeCollaborator(data)">cancel</i>   
+        </div>
+      </div>
+
+    <div fxFlex="100%" fxLayout="row">
+      <div fxFlex="10%" fxLayoutAlign="start center">
+        <button mat-mini-fab disabled class="addButton mini-fab" >
+          <i class="material-icons icon"> person_add</i>
+       </button>
+      </div>
+      <div fxFlex="80%" fxLayoutAlign="center center" class="inputDiv">
+        <input class="input"  placeholder="person or email to share with" [matMenuTriggerFor]="menu"
+        [(ngModel)]="nameInput"  (keydown)="getName($event)" />
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-menu  (click)="$event.stopPropagation()" #menu="matMenu"  [overlapTrigger]="false">
+      <div style="width:280px" *ngFor='let search of nameList'>
+        <div class="panel" (click)="addToColaborator(search)">
+          {{search.firstName | titlecase}} {{search.lastName | titlecase}} [{{search.email}}]
+          <mat-divider></mat-divider>
+        </div>
+        </div>
+  </mat-menu>
+  
+  <mat-card-footer fxLayoutAlign="end end" style="background-color: gray">
+      <button mat-button (click)="cancel()">Cancel</button>
+      <button mat-button (click)="saveToList()">Save</button>
+  </mat-card-footer>
+</mat-card>
+

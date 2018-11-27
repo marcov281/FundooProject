@@ -1,0 +1,41 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.card {
+  @include width(100%);
+  @include height(100%);
+}
+
+.div {
+  @include width(60%);
+  @include height(182px);
+  @include margin(10px);
+}
+
+.reminders {
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.maindiv {
+  padding-top: 5%;
+}
+
+.div2 {
+  background-color: $blue;
+}
+
+.unidentifieddiv {
+  padding-top: 6%;
+}
+
+.wrapdiv {
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 460px) {
+  .maindiv {
+    padding-top: 50px
+  }
+}

@@ -1,0 +1,55 @@
+
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout="row wrap" class="maindiv">
+<mat-card class="card_note maTCard" *ngFor="let note of notes" 
+[ngStyle]="{'background-color':note.color}">
+
+<mat-card-header>
+<div class="div2" [innerHTML]="note.title">
+</div>
+</mat-card-header>
+
+<mat-card-content class="take_note">
+<div *ngFor="let data of note.noteCheckLists" class="div2">
+<div fxLayout="row" *ngIf="data.status=='open' && data.isDeleted==false">
+
+<div fxFlex=15%>
+  <mat-checkbox [ngModel]="false" *ngIf="note.id!=noteChangeId || change==true" (click)="updateCheckbox()"></mat-checkbox>
+</div>
+<div fxFlex=80% [innerHTML]="data.itemName"></div>
+</div>
+<div fxLayout="row" *ngIf="data.status=='close' && data.isDeleted==false">
+<div fxFlex=15%>
+  <mat-checkbox [ngModel]="true"  *ngIf="note.id!=noteChangeId || change==true" (click)="updateCheckbox()"></mat-checkbox>
+</div>
+<s fxFlex=80% [innerHTML]="data.itemName"></s>
+</div>
+
+</div>
+</mat-card-content>
+
+<mat-card-content class="take_note">
+<div class="div2" [innerHTML]="note.description"></div>
+</mat-card-content>
+
+<mat-chip-list #chipList fxLayout="row" class="wrap" fxLayoutAlign="start center">
+<div *ngFor="let label of note.noteLabels">
+  <mat-chip class="wrap" *ngIf="label.isDeleted==false">
+    {{label.label}}
+    <mat-icon matChipRemove (click)="removeChip(note.id,label.id)">cancel</mat-icon>
+  </mat-chip>
+</div>
+</mat-chip-list>
+
+<mat-card-actions class="action">
+<button mat-icon-button matTooltip="more">
+  <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
+</button>
+</mat-card-actions>
+
+<mat-menu #menu="matMenu">
+<button mat-menu-item (click)="deeteForever(note)">Delete Forever </button>
+<button mat-menu-item (click)="restore(note)">restore</button>
+</mat-menu>
+</mat-card>
+</div>
+

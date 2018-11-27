@@ -1,0 +1,22 @@
+<div fxLayout="column">
+  <div fxFlex="30" fxLayout="row">
+    <div fxFlex.lg="20" fxflex.md="20" fxflex.sm="0" fxflex.xs="0"></div>
+    <div fxFlex.lg="60" fxflex.md="60" fxflex.sm="100" fxflex.xs="100" >
+
+      <!-- this is to include the add note selector -->
+      <app-add-notes class="add" (onAdding)="onAdding($event)"></app-add-notes>
+
+    </div>
+    <div fxFlex.lg="20" fxflex.md="20" fxflex.sm="0" fxflex.xs="0"></div>
+  </div>
+ 
+    <div fxFlex="70" fxflex.md="80" fxflex.sm="90" fxflex.xs="100" 
+    fxLayoutAlign="start center" fxLayoutGap="10px" fxLayout="row wrap">
+
+    <!-- this is to include the note card design in th elabel  -->
+      <app-note-card [notes]="notes" (updateCard)="updateCard($event)"></app-note-card>
+      
+    </div>
+  
+  </div>
+

@@ -1,0 +1,21 @@
+<!-- this is take a note basic -->
+<div fxLayout="column">
+  <div fxFlex="30" fxLayout="row">
+    <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="0%" fxFlex.xs="0%"></div>
+    <div fxFlex.lg="60%" fxFlex.md="60%" fxFlex.sm="100%" fxFlex.xs="100%" class="addNote">
+
+      <!-- adding add notes selector to add new note -->
+      <app-add-notes class="add" (onAdding)=refresh($event)></app-add-notes>
+
+    </div>
+    <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="0%" fxFlex.xs="0%"></div>
+  </div>
+  <div fxFlex="70" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout="row wrap">
+    <div *ngIf="pinNotes.length>0"><b>Pinned</b></div>
+    <app-note-card *ngIf="pinNotes" [notes]="pinNotes" (updateCard)="updateCard($event)" (themeCol)="updateCard($event)"
+      (archivenote)="archivenote($event)" (updatepin)="updatepin()" (updateChipInCard)="chipUpdate($event)" class="pin"></app-note-card>
+    <div *ngIf="pinNotes.length>0"><b>Others</b></div>
+    <app-note-card *ngIf="unPinNotes" [notes]="unPinNotes" (updateCard)="updateCard($event)" (themeCol)="updateCard($event)"
+      (archivenote)="archivenote($event)" (updatepin)="updatepin()" (updateChipInCard)="chipUpdate($event)"></app-note-card>
+  </div>
+</div>

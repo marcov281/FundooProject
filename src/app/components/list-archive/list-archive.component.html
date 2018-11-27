@@ -1,0 +1,84 @@
+
+<div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout="row wrap" class="mainDiv">
+<!-- this is to print the archive cards in the archive list -->
+<mat-card class="card_note matCard3" *ngFor="let note of notes" 
+  [ngStyle]="{'background-color':note.color}">
+
+<!-- this will print the title o the card  -->
+  <mat-card-header>
+    <div class="div2" [innerHTML]="note.title"></div>
+    <span>
+      <button mat-icon-button matTooltip="Pin Archive note" (click)="pinArchive(note)">
+        <img src="../../../assets/icons/pin.svg" />
+      </button>
+    </span>
+  </mat-card-header>
+
+<!-- this will print the description of the card -->
+<mat-card-content class="take_note">
+  <div *ngFor="let data of note.noteCheckLists" class="div2">
+  <div fxLayout="row" *ngIf="data.status=='open' && data.isDeleted==false">
+  
+  <div fxFlex=15%>
+    <mat-checkbox [ngModel]="false" *ngIf="note.id!=noteChangeId || change==true" (click)="updateCheckbox(data,note)"></mat-checkbox>
+  </div>
+  <div fxFlex=80% [innerHTML]="data.itemName"></div>
+  </div>
+  <div fxLayout="row" *ngIf="data.status=='close' && data.isDeleted==false">
+  <div fxFlex=15%>
+    <mat-checkbox [ngModel]="true"  *ngIf="note.id!=noteChangeId || change==true" (click)="updateCheckbox(data,note)"></mat-checkbox>
+  </div>
+  <s fxFlex=80% [innerHTML]="data.itemName"></s>
+  </div>
+  
+  </div>
+  </mat-card-content>
+
+  <mat-card-content class="take_note">
+    <div class="div2" [innerHTML]="note.description"></div>
+  </mat-card-content>
+
+<!-- this will print the list of lbel in the card list -->
+  <mat-chip-list #chipList fxLayout="row" class="wrap" fxLayoutAlign="start center">
+    <div *ngFor="let label of note.noteLabels">
+      <mat-chip class="wrap" *ngIf="label.isDeleted==false">
+        <i class="material-icons icon"> access_time</i>
+        {{label.label}}
+        <mat-icon matChipRemove (click)="removeChip(note.id,label.id)">cancel</mat-icon>
+      </mat-chip>
+    </div>
+  </mat-chip-list>
+  <br>
+  <mat-chip-list #chipList fxLayout="row" class="wrap" fxLayoutAlign="start center" *ngIf="note!=undefined && note.reminder.length!=0">
+      <mat-chip class="wrap">
+        <i class="material-icons icon"> access_time</i>
+        {{note.reminder[0]|date:"medium"}}
+        <mat-icon matChipRemove (click)="removeChip(note.id,label.id)">cancel</mat-icon>
+      </mat-chip>
+  </mat-chip-list>
+
+<!-- this section will give all the option to the the cards -->
+  <mat-card-actions class="action">
+    <button mat-icon-button matTooltip="reminder">
+      <img src="../../../assets/icons/reminder.svg" class="svg_img"/>
+    </button>
+
+    <button mat-icon-button matTooltip="add colaborator">
+      <i class="material-icons buttonicon" > person_add </i>
+    </button>
+
+    <app-theme matTooltip="change color" [note]="note"
+      (notify)="receive_color($event)" (colorChange)="themeChange($event)"></app-theme>
+
+    <app-add-archive [note]="note" (click)="unarchive(note)"></app-add-archive>
+
+    <button mat-icon-button matTooltip="add photo">
+      <i class="material-icons buttonicon" >photo</i>
+    </button>
+    <app-more [note]="note" (ondelete)=refresh($event)
+      (update)="updateLabel($event)"></app-more>
+  </mat-card-actions>
+
+</mat-card>
+</div>
+

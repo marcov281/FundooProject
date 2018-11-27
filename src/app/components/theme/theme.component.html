@@ -1,0 +1,47 @@
+<!-- <button mat-icon-button class="fundoo33"  > -->
+  <mat-icon class="icon" [matMenuTriggerFor]="menuColor" matTooltip="Change Color"> palette </mat-icon>
+<!-- </button> -->
+<mat-menu #menuColor="matMenu" yPosition="above" [overlapTrigger]="false" class="colorCard">
+  <div class="colorDiv">
+    <button mat-menu-item (click)="setcolor('#FAFAFA')" class="colorPalette col1" >
+      <mat-icon></mat-icon>
+    </button>
+    <button mat-menu-item (click)="setcolor('#FF8A80')" class="colorPalette col2" >
+      <mat-icon></mat-icon>
+    </button>
+    <button mat-menu-item (click)="setcolor('#FFD180')" class="colorPalette col3" >
+      <mat-icon></mat-icon>
+    </button>
+    <button mat-menu-item (click)="setcolor('#FFFF8D')" class="colorPalette col4" >
+      <mat-icon></mat-icon>
+    </button>
+  </div>
+  <div class="colorDiv">
+    <button mat-menu-item (click)="setcolor('#CCFF90')" class="colorPalette col5" >
+      <mat-icon></mat-icon>
+    </button>
+    <button mat-menu-item (click)="setcolor('#A7FFEB')" class="colorPalette col6" >
+      <mat-icon></mat-icon>
+    </button>
+    <button mat-menu-item (click)="setcolor('#80D8FF')" class="colorPalette col7" >
+      <mat-icon></mat-icon>
+    </button>
+    <button mat-menu-item (click)="setcolor('#82B1FF')" class="colorPalette col8" >
+      <mat-icon></mat-icon>
+    </button>
+  </div>
+  <div class="colorDiv">
+    <button mat-menu-item (click)="setcolor('#B388FF')" class="colorPalette col9" >
+      <mat-icon></mat-icon>
+    </button>
+    <button mat-menu-item (click)="setcolor('#F8BBD0')" class="colorPalette col10" >
+      <mat-icon></mat-icon>
+    </button>
+    <button mat-menu-item (click)="setcolor('#D7CCC8')" class="colorPalette col11" >
+      <mat-icon></mat-icon>
+    </button>
+    <button mat-menu-item (click)="setcolor('#CFD8DC')" class="colorPalette col12" >
+      <mat-icon></mat-icon>
+    </button>
+  </div>
+</mat-menu>

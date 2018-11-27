@@ -1,0 +1,85 @@
+<mat-card class="example-card">
+  <mat-card-header class="header">
+    Collaborators
+  </mat-card-header>
+  <mat-divider></mat-divider>
+
+  <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly start" fxLayoutGap="8px">
+
+    <div fxFlex="45%" fxLayout="row" fxLayoutAlign="space-evenly start"
+     *ngIf="owner==true;" class="button1">
+      <div fxFlex="10"><button mat-mini-fab [ngStyle]="{'background-image':
+      'url(' +imagePath+ ')','background-size':'cover'}"
+          disabled></button></div>
+      <div fxFlex="90" fxLayout="column">
+        <div fxflex="45%" class="textPrint">{{name}}<span >(Owner)</span></div>
+        <div fxflex="45%" class="textPrint mailId">{{mail}}</div>
+      </div>
+    </div>
+
+    <div fxFlex="45%" fxLayout="row" fxLayoutAlign="space-evenly start"
+     *ngIf="partner==true;" class="button1">
+      <div fxFlex="10"><button mat-mini-fab>{{partnerData.email | titlecase |slice:0:1}}</button></div>
+      <div fxFlex="90" fxLayout="column">
+        <div fxflex="45%" class="textPrint">{{partnerData.firstName}} {{partnerData.lastName}}<span >(Owner)</span></div>
+        <div fxflex="45%" class="textPrint mailId">{{partnerData.email}}</div>
+      </div>
+    </div>
+
+
+    <div style="width: 95%" fxLayout="row" *ngFor="let data of colList ">
+        <div fxFlex="10%" fxLayoutAlign="start center">
+            <button mat-mini-fab class="miniFab" >{{data.letter}}</button>
+        </div>
+        <div fxFlex="2%"></div>
+        <div fxFlex="78%" fxLayoutAlign="start center" class="inputDiv">
+            <span>{{data.userobj.email}}</span>
+        </div>
+        <div fxFlex="10%" fxLayoutAlign="end center">
+            <i class="material-icons icon" (click)="removeCollaborator(data)">cancel</i>   
+        </div>
+    </div>
+
+
+
+    <div style="width: 95%" fxLayout="row" *ngFor="let data of listCollaborator ">
+        <div fxFlex="10%" fxLayoutAlign="start center">
+            <button mat-mini-fab class="miniFab" >{{data.letter}}</button>
+        </div>
+        <div fxFlex="2%"></div>
+        <div fxFlex="78%" fxLayoutAlign="start center" class="inputDiv">
+            <span>{{data.userobj.email}}</span>
+        </div>
+        <div fxFlex="10%" fxLayoutAlign="end center">
+            <i class="material-icons icon" (click)="addCollaboratorList(data)">check</i>   
+        </div>
+      </div>
+
+    <div fxFlex="45%" fxLayout="row">
+      <div fxFlex="10%" fxLayoutAlign="start center">
+        <button mat-mini-fab disabled class="addButton">
+          <i class="material-icons icon"> person_add</i>
+        </button>
+      </div>
+      <div fxFlex="80%" fxLayoutAlign="center center" class="inputDiv">
+        <input class="input"  placeholder="person or email to share with" [matMenuTriggerFor]="menu"
+        [(ngModel)]="nameInput"  (keydown)="getName($event)" />
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-menu  (click)="$event.stopPropagation()" #menu="matMenu"  [overlapTrigger]="false">
+      <div style="width:280px" *ngFor='let search of nameList'>
+        <div class="panel" (click)="addToColaborator(search)">
+          {{search.firstName | titlecase}} {{search.lastName | titlecase}}   [{{search.email}}]
+          <mat-divider></mat-divider>
+        </div>
+        </div>
+  </mat-menu>
+  
+  <mat-card-footer fxLayoutAlign="end end" style="background-color: gray">
+      <button mat-button (click)="close()">Close</button>
+  </mat-card-footer>
+
+</mat-card>
+

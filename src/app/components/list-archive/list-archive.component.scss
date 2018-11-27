@@ -1,0 +1,49 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.div2 {
+  @include textdiv(200px);
+  word-wrap: break-word;
+}
+
+.card_note {
+  @include width(300px);
+  border-radius: 10px;
+  position: relative;
+}
+
+
+.card_note:hover .action {
+  opacity: 1;
+}
+
+.action {
+  opacity: 0;
+  ;
+}
+
+.card_note:hover .pin {
+  display: block;
+}
+
+
+.pin {
+  opacity: 0;
+}
+
+.mainDiv {
+  margin-top: 4%
+}
+
+.matCard3 {
+  margin: 20px;
+  height: min-content;
+}
+
+.svg_img {
+  @include _svgImage;
+}
+
+.buttonicon {
+  @include mat_Icon;
+}

@@ -1,0 +1,188 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.matcard {
+  margin-top: 80px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.span {
+  top: 10px;
+  right: 0px;
+  position: absolute;
+}
+
+.div2 {
+  @include textdiv(90%);
+}
+
+.div4 {
+  @include textdiv(587px);
+}
+
+div:empty:before {
+  content: attr(data-text);
+  color: $gray
+}
+
+.take_note {
+  @include takenote;
+  padding-left:0px;
+}
+
+@media only screen and (max-width: 320px) {
+  .matcard {
+    @include card_width(80px, 315px)
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .matcard {
+    @include card_width(80px, 365px)
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .matcard {
+    @include card_width(80px, 600px)
+  }
+}
+
+@media only screen and (max-width: 969px) {
+  .matcard {
+    @include card_width(80px, 800px)
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .matcard {
+    @include card_width(80px, 410px)
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .matcard {
+    @include card_width(80px, 700px)
+  }
+}
+
+@media only screen and (min-width: 970px) {
+  .matcard {
+    @include card_width(80px, 700px)
+  }
+}
+
+.title {
+  border: 0px;
+  border: none;
+}
+
+.input2 {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.svg_img {
+  @include _svgImage;
+}
+
+.icons {
+  opacity: 0.5;
+}
+
+.matICON {
+  cursor: pointer;
+}
+
+.action {
+  display: flex;
+}
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+::ng-deep.mat-dialog-container {
+    @include matDialog
+  }
+  .header{
+      font-size: 20px;
+      font-weight: 500
+  }
+  .button1{
+      padding-top: 15px;
+  }
+  .textPrint{
+      width:400px;
+      padding-left: 10px;
+      @include sometext(14px,500)
+  }
+  .mailId{
+      opacity: 0.6;
+      @include sometext(12px,400)
+  }
+  .addIcon{
+    height: 40px;
+    width: 24px;
+    border-radius: 100%;
+    justify-content: center;
+    border:1px solid gray;
+  }
+  .icon{
+      opacity: 0.5;
+      color: black;
+      cursor: pointer;
+  }
+
+  .addButton{
+    background-color: white;
+    border: 1px solid black;
+  }
+  .inputDiv{
+    height: 40px;
+
+  }
+  .input{
+      height: 100%;
+      width: 380px;
+      border: none;
+      outline:none;
+  }
+  .list{
+      overflow-y: auto;  
+  }
+  .panel{
+    background-color: $gray;
+    cursor: pointer;
+    width: 500px;
+    height: 20px;
+  }
+  .miniFab{
+      background-color: $deep_yellow
+  }
+ .button2{
+     padding-top: 3px;
+ }
+
+ ::ng-deep.mat-menu-panel {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - 48px);
+    border-radius: 2px;
+    outline: 0;
+    width: 500px;
+    overflow-x: hidden;
+}
+
+.colcard{
+  margin-top:80px;
+}
+.mini-fab{
+  box-shadow:none;
+  margin-left: 2px;
+}
+.content{
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px
+}

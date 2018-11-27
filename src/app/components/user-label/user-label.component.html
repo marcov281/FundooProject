@@ -1,0 +1,15 @@
+<div fxLayout="column">
+    <div>
+      <span class="span">Labels</span>
+      <button mat-button class="butt1" (click)="openDialog()">EDIT</button>
+    </div>
+  </div>
+<div *ngFor="let label of labellist">
+  <button mat-stroked-button class="wrap" (click)="emitlabelname(label.label);" 
+  [class.selected]="label.label==routeName" routerLink="/label/{{label.label}}">
+    <img class="img" src="../../../assets/icons/label.svg">{{label.label}}
+  </button>
+</div>
+<button mat-stroked-button (click)="openDialog()">
+<img class="img" src="../../../assets/icons/add.svg">Create new label</button>
+<mat-divider></mat-divider>

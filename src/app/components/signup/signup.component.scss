@@ -1,0 +1,76 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.image2 {
+  @include height(10%);
+  @include width(20%);
+}
+
+.inputdetails {
+  padding-left: 15px;
+  @include width(45%);
+
+}
+
+.username {
+  @include width(93%);
+}
+
+.para1 {
+  font-size: 12px;
+}
+
+.link {
+  text-decoration: none;
+  color: $blue;
+}
+
+.next {
+  border-radius: 4px;
+  background-color: $blue
+}
+
+.para2 {
+
+  font-size: 15px;
+  color: $blue
+}
+
+.heading_card {
+  font-size: 20px
+}
+
+.input1 {
+  @include width(45%);
+}
+
+.password {
+  @include width(45%);
+}
+
+.danger {
+  background-color: $white;
+}
+
+.success {
+  border: 4px solid $deep_blue;
+  border-radius: 7px
+}
+.fundoo{
+  font-weight: 500;
+  font-size: 30px
+}
+.f,.d{
+  font-size: 35px;
+  color: $blue;
+}
+.u,.o2{
+  color: $red
+}
+.o1{
+  color:$green
+}
+.n{
+  color:$yellow
+}
+

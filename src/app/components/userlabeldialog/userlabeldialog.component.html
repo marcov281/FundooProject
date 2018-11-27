@@ -1,0 +1,42 @@
+<mat-card>
+<div>
+<div class="label">Add label</div>
+<div fxLayout="row">
+<div fxFlex=20 class="unique" ><button mat-icon-button> <i class="material-icons" 
+(click)="clear()" matTooltip="clear">clear</i></button></div>
+<div fxFlex=60> <mat-form-field class="example-full-width;">
+<input matInput placeholder="Create new label" [(ngModel)]="model.labelName">
+</mat-form-field></div>
+<div fxFlex=20 class="unique2"><button mat-icon-button (click)="createlabel()">
+<i class="material-icons" matTooltip="add label">check</i></button></div>
+</div>
+
+ <div *ngFor="let label of labellist">
+
+  <div fxLayout="row"  *ngIf="label.id!=editlabelid">
+    <div fxFlex=20 class="unique" ><button mat-icon-button (click)="deleteLabel(label.id)">
+     <i class="material-icons" matTooltip="delete">delete</i></button></div>
+    <div fxFlex=60 class="wrap" (click)="editlabel(label.id)">{{label.label}} </div>
+    <div fxFlex=20 class="unique2"><button mat-icon-button (click)="editlabel(label.id)">
+    <i class="material-icons" matTooltip="edit" >edit</i></button></div>
+  </div>
+
+  <div fxLayout="row"  *ngIf="label.id==editlabelid" >
+      <div fxFlex=20 class="unique" ><button mat-icon-button (click)="deleteLabel(label.id)"> 
+      <i class="material-icons" matTooltip="delete">delete</i></button></div>
+      <div fxFlex=60 contenteditable="true" id="newlabel" class="div5" 
+      [innerHTML]="label.label"> </div>
+      <div fxFlex=20 class="unique2"><button mat-icon-button 
+      (click)="updateLabel(label.id);editlabelid=false"><i class="material-icons" 
+      matTooltip="update label">check</i></button></div>
+  </div>
+
+</div>
+
+
+
+  <hr class="hr">
+  <div class="createlabel"><button mat-button (click)="createlabel();onNoClick()">
+  Close</button></div>
+</div>
+</mat-card>

@@ -1,0 +1,34 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.input {
+  border: 0px;
+  outline: none
+}
+
+.box {
+  padding-right: 10px;
+}
+
+.wrap {
+  @include wrap;
+}
+
+.maindiv2 {
+  @include width(257px);
+  padding-left: 10px;
+}
+
+.labellist {
+  display: flex;
+  align-items: flex-start;
+  font-size: 17px;
+}
+
+.list2 {
+  overflow-y: auto
+}
+.icon{
+  opacity: 0.5;
+  cursor: pointer;
+}

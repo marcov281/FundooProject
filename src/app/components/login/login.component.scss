@@ -1,0 +1,43 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.container {
+  display: flex;
+}
+
+.image {
+  @include height(15%);
+  @include width(30%);
+
+}
+
+.link {
+  color: $blue;
+  text-decoration: none;
+}
+
+.input {
+  @include width(90%);
+}
+
+#next {
+  background-color: $blue;
+  border-radius: 4px
+}
+.fundoo{
+  font-weight: 500;
+  font-size: 30px
+}
+.f,.d{
+  font-size: 35px;
+  color: $blue;
+}
+.u,.o2{
+  color: $red
+}
+.o1{
+  color:$green
+}
+.n{
+  color:$yellow
+}
