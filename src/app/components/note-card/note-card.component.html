@@ -1,0 +1,109 @@
+
+  <div fxLayout="row wrap" [ngClass]="{'containdiv': !data}" fxLayoutAlign="center center" 
+    fxLayoutWrap fxLayoutGap="10px"  >
+  <mat-card id={{note.id}} [ngClass]="{'grid': !data}" class="card_note matCard"
+    [ngStyle]="{'background-color':note.color}" *ngFor="let note of notes |searchFilter:message">
+    <mat-card-header class="take_note" fxLayout="row">
+
+      <div class="div2" fxFlex="90%" [innerHTML]="note.title" (click)="openDialog(note)">
+      </div>
+      
+      <div fxFlex="10%">
+        <button mat-icon-button class="action" matTooltip="Unpin note" 
+        (click)="note.isPined=false;changePin(note)" *ngIf="note.isPined==true">
+          <img src="../../../assets/icons/bluepin.svg" />
+        </button>
+
+        <button mat-icon-button class="action" matTooltip="Unpin note" 
+        (click)="note.isPined=true;changePin(note)" *ngIf="note.isPined==false">
+          <img src="../../../assets/icons/pin.svg" />
+        </button>
+
+      </div>
+    </mat-card-header>
+
+    <mat-card-content class="take_note">
+      <div *ngFor="let data of note.noteCheckLists" class="div2">
+        <div fxLayout="row" *ngIf="data.status=='open' && data.isDeleted==false">
+
+          <div fxFlex=15%>
+            <mat-checkbox [ngModel]="false" *ngIf="note.id!=noteChangeId || change==true" 
+            (click)="updateCheckbox(data,note)"></mat-checkbox>
+          </div>
+          <div fxFlex=80% [innerHTML]="data.itemName"></div>
+        </div>
+        <div fxLayout="row" *ngIf="data.status=='close' && data.isDeleted==false">
+          <div fxFlex=15%>
+            <mat-checkbox [ngModel]="true" *ngIf="note.id!=noteChangeId || change==true" 
+            (click)="updateCheckbox(data,note)"></mat-checkbox>
+          </div>
+          <s fxFlex=80% [innerHTML]="data.itemName"></s>
+        </div>
+
+      </div>
+    </mat-card-content>
+
+    <mat-card-content class="take_note" (click)="openDialog(note)">
+      <div class="div2" [innerHTML]="note.description">
+      </div>
+    </mat-card-content>
+
+    <mat-chip-list #chipList fxLayout="row" fxLayoutAlign="start center">
+      <div *ngFor="let label of note.noteLabels">
+        <mat-chip  *ngIf="label.isDeleted==false" routerLink="/label/{{label.label}}" class="width" >
+        <span  class="wraping">{{label.label}}</span> 
+          <mat-icon matChipRemove (click)="removeChip(note.id,label.id)">cancel</mat-icon>
+        </mat-chip>
+      </div>
+      <div *ngFor="let col of note.collaborators">
+        <button mat-mini-fab class="mini-fab">
+          {{col.email | titlecase | slice:0:1}}</button>
+      </div>
+    </mat-chip-list>
+    <br>
+
+<mat-chip-list #chipList fxLayout="row" class="wrap" fxLayoutAlign="start center">
+<mat-chip class="wrap" *ngIf=" checkTime(note)==true && 
+note!=undefined && note.reminder[0]!='Invalid Date'"(click)="getChnageMenu()">
+<i class="material-icons icon"> access_time</i>
+{{note.reminder[0]|date:"medium"}}
+<mat-icon matChipRemove (click)="removeReminder(note,note.reminder[0])">cancel</mat-icon>
+</mat-chip>
+
+<mat-chip class="wrap" *ngIf="checkTime(note)==false 
+&& note!=undefined && note.reminder[0]!='Invalid Date'"
+(click)="getChnageMenu()">
+<i class="material-icons icon"> access_time</i>
+<S> {{note.reminder[0]|date:"medium"}}</S>
+<mat-icon matChipRemove (click)="removeReminder(note,note.reminder[0])">cancel</mat-icon>
+</mat-chip>
+</mat-chip-list>
+
+    <mat-card-actions class="action actionlist" fxLayoutAlign="space-between center">
+      <app-remindme [note]=note (sendDate)="getDate($event)"></app-remindme>
+
+      <app-collaborator [note]=note></app-collaborator>
+
+      <app-theme [note]="note" (notify)="receive_color($event)" 
+      (colorChange)="themeChange($event)"></app-theme>
+
+
+      <app-add-archive [note]="note" (showNote)="shownote($event)"></app-add-archive>
+
+     
+        <i class="material-icons icon">photo</i>
+      
+
+
+      <app-more [note]="note" (ondelete)="refresh($event)" (changeBox)="hideBox($event)" 
+      (update)="updateCHIP($event)"></app-more>
+
+    </mat-card-actions>
+    <div *ngIf="note.questionAndAnswerNotes.length>0">
+      Question asked:-
+      <div>{{note.questionAndAnswerNotes[0].message}}</div>
+    </div>
+    <!-- </div> -->
+  </mat-card>
+  </div>
+

@@ -1,0 +1,16 @@
+<div fxLayout="column">
+<div fxflex=90%>
+<image-cropper
+    [imageChangedEvent]=file
+    [maintainAspectRatio]="true"
+    [aspectRatio]="4 / 4"
+    [resizeToWidth]="128"
+    format="png"
+    (imageCropped)="imageCropped($event)"
+></image-cropper>
+</div>
+<mat-divider></mat-divider>
+<div fxflex=10% fxLayoutAlign="center center" >
+<button mat-stroked-button color="primary" class="button" (click)="updatePic()" >Update Profile-pic</button>
+</div>
+</div>

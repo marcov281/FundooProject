@@ -1,0 +1,86 @@
+<div class="container1">
+<div fxLayout="column" fxLayoutGap="6%">
+<div fxFlex="20%"></div>
+<div fxFlex="60%" fxLayout="row">
+<div fxFlex="30%" fxFlex.xs="0%" fxFlex.sm="0%" fxFlex.md="5%" fxFlex.lg="25%"></div>
+<div fxFlex="40%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="90%" fxFlex.lg="50%">
+
+<mat-card>
+  <div  class="fundoo">
+      <span class="f">F</span>
+      <span class="u">u</span>
+      <span class="n">n</span>
+      <span class="d">d</span>
+      <span class="o1">o</span>
+      <span class="o2">o</span>
+  </div>
+
+  <mat-card-title>Create your Fundoo Account</mat-card-title>
+
+  <mat-form-field class="input1">
+    <input matInput placeholder="First name" [(ngModel)]="model.fName" required>
+  </mat-form-field>
+
+
+  <mat-form-field class="inputdetails">
+    <input matInput placeholder="Last name" [(ngModel)]="model.lName" required>
+  </mat-form-field>
+
+
+  <mat-form-field class="username">
+    <input matInput placeholder="User email" [(ngModel)]="model.email" required>
+  </mat-form-field>
+
+
+  <p class="para1">You can user letter number and periods</p>
+
+  <mat-form-field class="password">
+    <input matInput placeholder="Password" [(ngModel)]="model.password" 
+    [type]="hide?'text':'password'"required>  
+  </mat-form-field>
+
+
+  <mat-form-field id="inputdetails">
+<input matInput placeholder="Confirm password" [(ngModel)]="model.confirm_password" 
+[type]="hide?'text':'password'"required>
+<mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+  </mat-form-field>
+
+<p id="para1">Use 8 or more characters with a mix of letters, numbers and symbols</p>
+
+<div fxLayout="row" fxLayoutGap="6%" fxLayoutAlign="center center">
+  <div fxFlex="{{(100/cards.length)-2*cards.length}}%" *ngFor="let card of cards; let i = index">
+    <mat-card (click)="onMouseClick(i)" [ngClass]="{'success' : show[i], 'danger' : !show[i]}">
+      <mat-card-header>
+        <mat-card-title class="heading_card"><b>{{card.name}}</b></mat-card-title>
+      </mat-card-header>
+      <p class="para2">Unlimited wall space</p>
+      <hr>
+      <p class="para2"> Nice Interface</p>
+      <hr>
+      <p class="para2">$ 6.99/mon</p>
+      <hr>
+      <mat-card-content>
+        <p>{{card.description}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>SHARE</button>
+        <button mat-button>LIKE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<a class="link" routerLink="/login">Sign in instead</a>
+<div fxLayoutAlign="end">
+<button class="next" (click)="signup()" mat-flat-button>Sign up</button>
+</div>
+
+</mat-card>
+
+</div>
+<div fxFlex="30%" fxFlex.xs="0%" fxFlex.sm="0%" fxFlex.md="5%" fxFlex.lg="25%"></div>
+</div>
+<div fxFlex="20%"></div>
+</div>
+</div>

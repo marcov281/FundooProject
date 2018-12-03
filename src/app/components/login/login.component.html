@@ -1,0 +1,47 @@
+<div class="container" fxLayout="column" fxLayoutGap="12%" >
+  <!-- <div > -->
+    <div fxFlex.lg="33%" ></div>
+    <div fxFlex.lg="33%" fxLayout="row">
+      <div fxFlex.xl="40%" fxFlex.xs="0%" fxFlex.sm="5%" fxFlex.md="30%" fxFlex.lg="33%"></div>
+      <div fxFlex.xl="30%" fxFlex.xs="100%" fxFlex.sm="90%" fxFlex.md="40%" fxFlex.lg="33%">
+        
+        <!-- this is the dsign of login card -->
+        <mat-card>
+        <div fxLayoutAlign="center center" class="fundoo">
+          <span class="f">F</span>
+          <span class="u">u</span>
+          <span class="n">n</span>
+          <span class="d">d</span>
+          <span class="o1">o</span>
+          <span class="o2">o</span>
+          </div>
+        <mat-card-title fxLayoutAlign="center center">Sign in</mat-card-title>
+        <div fxLayoutAlign="center center">with your Fundoo Account</div>
+        
+        <!-- this is the form field -->
+        <mat-form-field class="input">
+        <input matInput placeholder="Email" type="email" [(ngModel)]="model.email" required>
+        <mat-error *ngIf="emailIsInvalid==true">please give email in proper format</mat-error>
+        </mat-form-field>
+        <mat-form-field class="input">
+        <input matInput placeholder="Password" type="password" [(ngModel)]="model.password"
+        [type]="hide?'text':'password'"required>  
+        </mat-form-field>
+        <!-- form field ends here -->
+
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}
+        </mat-icon>
+        <div fxLayoutAlign="end"><button mat-flat-button class="next" (click)="login()">
+        Next</button></div>
+        <a class="link" routerLink="/forgot_pass">Forgot Password?</a>
+        <a class="link" routerLink="/signup">Create account</a>
+        </mat-card>
+ 
+      </div>
+      <div fxFlex.xl="40%" fxFlex.xs="0%" fxFlex.sm="5%" fxFlex.md="30%" fxFlex.lg="33%"></div>
+    </div>
+    <div fxFlex.lg="33%"></div>
+
+  <!-- </div> -->
+
+</div>

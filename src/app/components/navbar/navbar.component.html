@@ -1,0 +1,126 @@
+<div fxFlex >
+<div fxLayout="column wrap">
+<div>
+
+<!-- this is the toolbar or navbar design -->
+<mat-toolbar class="navbar" >
+<mat-toolbar-row style="display: flex;" fxLayoutAlign="space-between center" >
+
+<button mat-icon-button class="menu" matTooltip="menu">
+  <i (click)="drawer.toggle()" class="material-icons "> menu</i>
+</button>
+
+<span class="head" fxHide.xs="true" fxHide.sm="true">{{heading}}</span>
+      
+<!-- this is the search bar or div -->
+<div class="searchBar" *ngIf="search">
+<button mat-icon-button matTooltip="search" >
+  <i class="material-icons"> search</i>
+</button>
+<input type="input" placeholder="search" (click)="gotosearch();" 
+  class="search" [(ngModel)]="searchInput" (keydown)="change($event)"> 
+</div>
+<!-- search div ends -->
+
+<button mat-icon-button class="agenda"   
+   matTooltip="Grid view" (click)="changeView()" *ngIf="view==false && listGrid==true">
+  <i class="material-icons">view_agenda</i>
+</button>
+
+<button mat-icon-button class="agenda"   
+   matTooltip="List view" (click)="changeView()" *ngIf="view==true && listGrid==true">
+  <i class="material-icons ">apps</i>
+</button>
+
+<button mat-icon-button class="notify" fxHide.xs="true" fxHide.sm="true" 
+  matTooltip="notification" (click)="sendNotification()">
+  <i class="material-icons ">notifications</i>
+</button>
+
+<button mat-mini-fab class="minifab" [ngStyle]="{'background-image':
+'url(' +imagePath+ ')','background-size':'cover'}" (click)="log=!log" 
+(clickOutside)="log=false" matTooltip="profile"></button>
+
+</mat-toolbar-row>
+</mat-toolbar>
+</div>
+<!-- mat toolbar ends here -->
+
+<!-- starting of the sidenav container -->
+<div >
+<mat-sidenav-container class="example-container " fxFill hasBackdrop="false" >
+<mat-sidenav #drawer class="example-sidenav" [mode]="width > 720 ? 'side' : 'over'" >
+<mat-list  fxLayout="column" >
+
+  <button mat-stroked-button (click)="goToNotes()" 
+  [ngClass]="{'selected': isSelected }"><img class="img" 
+  src="../../../assets/icons/notes.svg">Notes</button>
+  
+  <button mat-stroked-button (click)="goToReminder()"
+   [ngClass]="{'selected': isReminder }"><img class="img" 
+  src="../../../assets/icons/reminder.svg">Reminder</button>
+  <mat-divider></mat-divider>
+
+
+
+<!-- including the label selector -->
+  <app-user-label [opendialog]="true" (sendName)="receiveName($event)" 
+  (click)="gotoLabel()"></app-user-label>   
+
+
+  <mat-divider></mat-divider>
+  <button mat-stroked-button (click)="gotoarchive()"  
+  [ngClass]="{'selected': isArchived}"><img class="img" 
+  src="../../../assets/icons/archive.svg">Archive</button>
+
+  <button mat-stroked-button (click)="gototrash()"  
+  [ngClass]="{'selected': isTrashed }"><img class="img" 
+  src="../../../assets/icons/trash.svg">Trash</button>
+  <mat-divider></mat-divider>
+
+</mat-list >
+</mat-sidenav>
+<div class="content abc">
+
+
+<mat-card  *ngIf="log" class="excard">
+<div fxLayout="column" fxLayoutAlign="space-around center" class="example-card">
+<div fxflex=70% fxLayout="row">
+<div fxflex=40 class="container" style="padding-left: 15px">
+<button mat-fab [ngStyle]="{'background-image'
+:'url(' +imagePath+ ')','background-size':'cover'}" >
+  <div class="overlay" (click)="fileInput.click()">
+    <a class="icon" title="User Profile">
+      <!-- <i class="fa fa-user"></i> -->
+      <p class="para">change</p>
+    </a>
+  </div>
+</button>
+</div>
+ 
+<div fxflex=60 fxLayout="column">
+  <div fxflex=50%>{{name}}</div>
+  <div fxflex=50%>{{mail}}</div>
+</div>
+</div>
+<mat-divider></mat-divider>
+<div fxflex=30% fxLayout="row" fxLayoutAlign="space-between center" > 
+<button mat-raised-button (click)="logout()">Logout</button>
+</div>
+</div>
+</mat-card>
+
+<input type="file" (change)="onFileChanged($event)" 
+#fileInput>
+
+<!-- profile cards ends here -->
+<div class="abc">
+  <router-outlet class="abc"></router-outlet>
+</div>
+</div>
+</mat-sidenav-container>
+<!-- sidenav container ends here -->
+
+</div>
+</div>
+</div>

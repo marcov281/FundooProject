@@ -1,0 +1,82 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.colorPalette {
+  border-radius: 100%;
+  outline: none;
+  border: none;
+  @include width(30px);
+  @include height(30px);
+}
+
+.colorCard {
+  position: fixed;
+  z-index: 2;
+  width: 129px;
+}
+
+.colorDiv {
+  margin-bottom: 5px;
+  display: flex;
+}
+
+.icon {
+  opacity: .5;
+  cursor: pointer;
+}
+
+.col1 {
+  @include color(#FAFAFA);
+}
+
+.col2 {
+  @include color(#FF8A80);
+}
+
+.col3 {
+  @include color(#FFD180);
+}
+
+.col4 {
+  @include color(#FFFF8D);
+}
+
+.col5 {
+  @include color(#CCFF90);
+}
+
+.col6 {
+  @include color(#A7FFEB);
+}
+
+.col7 {
+  @include color(#80D8FF);
+}
+
+.col8 {
+  @include color(#82B1FF);
+}
+
+.col9 {
+  @include color(#B388FF);
+}
+
+.col10 {
+  @include color(#F8BBD0);
+}
+
+.col11 {
+  @include color(#D7CCC8);
+}
+
+.col12 {
+  @include color(#CFD8DC);
+}
+::ng-host.mat-menu-panel {
+  min-width: 75px;
+  max-width: 129px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 2px;
+  outline: 0;
+}

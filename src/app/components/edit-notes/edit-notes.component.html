@@ -1,0 +1,133 @@
+<mat-card class="matcard" [ngStyle]="{'background-color':newcolor}" style="margin-top:0px">
+
+  <!-- this is the title section where we can change title and pin color -->
+  <div fxLayout="row">
+  <div fxflex=85% data-text="Title" id="title" contenteditable="true" class="div4" 
+  [innerHTML]="data.title">
+  </div>
+  <div fxflex=5% >
+<button mat-icon-button matTooltip="pin" *ngIf="data.isPined==false" (click)="changePin(data)">
+  <img src="../../../assets/icons/pin.svg" />
+</button>
+<button mat-icon-button matTooltip="pin" *ngIf="data.isPined==true" (click)="changePin(data)">
+  <img src="../../../assets/icons/bluepin.svg" />
+</button>
+  </div>
+  </div>
+
+<!-- this is the description where we can update checkbox description  -->
+<mat-card-content *ngIf="data.noteCheckLists.length!=0" class="content">
+<!-- this is to print the checkbx from the array -->
+<div *ngFor="let note of checkitem">
+<!-- this div is to print the unchecked checkbox -->
+  <div fxLayout="row" *ngIf="note.itemName!=name && note.isDeleted==false 
+  && note.status=='open'">
+    <div fxFlex="5%">
+      <mat-checkbox  (click)="checkboxUpdate(note)" [ngModel]="note.status=='close'">
+      </mat-checkbox>
+    </div>
+    <div fxFlex="85%"><input class="input2" [ngStyle]="{'background-color':newcolor}"
+    [(ngModel)]="note.itemName" type="text" (keydown)="updateCheckName($event,note)"/>
+    </div> 
+  <div fxFlex="5%">
+  <mat-icon class="mat_Icon" (click)="deleteChecked(note,data)" matTooltip="Delete">
+  clear</mat-icon>
+  </div>
+  </div>
+</div>
+
+
+<div *ngFor="let note of tempArray">
+
+  <!-- this div is to print the unchecked checkbox -->
+    <div fxLayout="row" *ngIf="note.itemName!=name  
+    && note.status=='open'">
+      <div fxFlex="5%">
+        <mat-checkbox (click)="checkboxUpdate(note)"></mat-checkbox>
+      </div>
+      <div fxFlex="85%"><input class="input2" [ngStyle]="{'background-color':newcolor}"
+      [(ngModel)]="note.itemName" type="text" (keydown)="updateCheckName($event,note)"/>
+      </div> 
+    <div fxFlex="5%">
+      <mat-icon class="mat_Icon" (click)="deleteFromTemp(note);
+      deleteChecked(note,data)" matTooltip="Delete">clear</mat-icon>
+    </div>
+    </div>
+  
+  </div>
+
+
+<!-- this is to add new checkbox in the editnotes popup -->
+<mat-divider></mat-divider>
+<div fxLayout="row" class=input2>
+  <div fxFlex=5%><i class="material-icons"> add</i> </div>
+  <div fxFlex=80%><input [ngStyle]="{'background-color':newcolor}"  
+  class="input2" placeholder="List item" type="text"
+  [(ngModel)]="listval" (keydown)="onKeydown($event);" /></div>
+</div>
+<mat-divider></mat-divider>
+
+<div *ngFor="let note of checkitem">
+<!-- this div is to print the checked checkbox -->
+<div fxLayout="row" *ngIf="note.itemName!=name && note.isDeleted==false 
+&& note.status=='close'">
+<div fxFlex="5%">
+<mat-checkbox [ngModel]="note.status=='close'" (click)="checkboxUpdate(note)"></mat-checkbox>
+</div>
+<div fxFlex="85%"><s><input class="input2" [ngStyle]="{'background-color':newcolor}"
+[(ngModel)]="note.itemName" type="text" (keydown)="updateCheckName($event,note)"/></s>
+</div> 
+<div fxFlex="5%">
+<mat-icon class="mat_Icon" (click)="deleteChecked(note,data)" matTooltip="Delete">
+clear</mat-icon>
+</div>
+</div>       
+</div>
+</mat-card-content>
+
+<!-- this is to print the description in the popup -->
+  <mat-card-content class="take_note content" *ngIf="data.noteCheckLists.length==0">
+    <div data-text="Take a note.." id="description" contenteditable="true"
+     class="div4" [innerHTML]="data.description">
+    </div>
+  </mat-card-content>
+
+<mat-chip-list #chipList fxLayout="row" class="wrap" fxLayoutAlign="start center">
+    <div *ngFor="let label of data.noteLabels">
+    <mat-chip class="wrap" *ngIf="label.isDeleted==false">
+      {{label.label}}
+      <mat-icon matChipRemove (click)="removeChip(data,label.id)">cancel</mat-icon>
+    </mat-chip>
+    </div>
+    <div *ngFor="let col of data.collaborators">
+        <button mat-mini-fab class="mini-fab">
+          {{col.email | titlecase | slice:0:1}}</button>
+      </div>
+</mat-chip-list>
+<br>
+
+<mat-chip-list #chipList fxLayout="row" class="wrap" fxLayoutAlign="start center">
+    <mat-chip class="wrap" *ngIf="reminder!=undefined && reminder!='Invalid Date'">
+      {{reminder | date:"medium"}}
+      <mat-icon matChipRemove (click)="removeReminder(data,reminder)">cancel</mat-icon>
+    </mat-chip>
+</mat-chip-list>
+
+<!-- this ia to perform the various option in the the popup -->
+  <mat-card-actions flexLayout="row" fxLayoutAlign="space-around center">
+
+    <app-remindme [note]=data (toEdit)=getReminderChip($event)></app-remindme>
+
+   <app-collaborator [note]=data></app-collaborator>
+
+    <app-theme [note]="data" (colorChange)=changeColor($event)></app-theme>
+
+
+
+    <app-add-archive [note]="data" (showNote)="shownote($event)"></app-add-archive>
+
+    <app-more [note]=data (update)="updateLabel($event)"></app-more>
+
+    <button mat-button (click)="onNoClick();updatecard()" matTooltip="close"> Close</button>
+  </mat-card-actions>
+</mat-card>

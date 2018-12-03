@@ -1,0 +1,209 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.menu {
+  @include margin(1%)
+}
+
+.head {
+  @include margin(10px)
+}
+
+.apps {
+  margin-right: 20px;
+}
+
+.notify {
+  margin-right: 20px;
+}
+
+.search {
+  @include height(39px);
+  background-color: $yellow;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 20px;
+  outline: none;
+  @include width(90%);
+
+}
+
+input:focus {
+  background-color: $white;
+}
+
+
+.navbar {
+  background-color: $deep_yellow;
+  display: flex;
+  position: fixed;
+  z-index: 2;
+
+
+}
+
+.searchBar {
+  background-color: $yellow;
+  display: flex;
+  align-items: center;
+  @include height(80%);
+  @include width(50%);
+  border-radius: 5px;
+}
+
+
+
+.example-container {
+
+  height: fit-content;
+  @include width(100%);
+}
+
+.example-sidenav {
+
+  padding-left: 0%;
+  padding-right: 0%;
+  padding-top: 5px;
+  background-color: $grey;
+  position: fixed;
+  margin-top: 56px;
+
+}
+
+.mat-stroked-button {
+  border: 0px;
+  line-height: 58px;
+  @include width(270px);
+  background-color: $grey;
+  text-align: left;
+  font-weight: 400;
+
+}
+
+.Link {
+  color: $black;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 5px;
+  text-decoration: none;
+  white-space: nowrap
+}
+
+.terms {
+  display: block;
+  margin: 12px 15px 12px 24px;
+}
+
+.img {
+  margin-right: 20px;
+}
+
+.example-card {
+  @include height(180px);
+  @include width(270px);
+}
+
+.excard {
+  right: 0;
+  top: 65px;
+  @include height(180px);
+  @include width(300px);
+  padding: 0px;
+  z-index: 11;
+  overflow: none;
+  position: fixed;
+}
+
+@media only screen and (max-width: 320px) {
+  .person {
+    margin-left: 50px
+  }
+}
+
+.unknowndiv {
+  border-radius: 100%;
+  background-color: paleturquoise;
+  @include height(50px);
+  @include width(50px);
+}
+
+.unknowndiv2 {
+  margin-left: 180px;
+  color: $grey;
+  border: 1px solid $black;
+  color: $black;
+  opacity: 0.5;
+  @include height(35px);
+}
+
+.heading2 {
+  justify-content: center;
+  display: flex;
+}
+
+@media only screen and (max-width: 414px) {
+  .agenda {
+    display: none;
+  }
+
+  .search {
+    width: inherit;
+  }
+
+  .searchBar {
+    @include width(70%);
+  }
+}
+
+.container:hover .overlay {
+  opacity: 0.8;
+}
+
+.fa-user:hover {
+  color: $white;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  @include width(100%);
+  @include height(100%);
+  opacity: 0;
+  transition: .3s ease;
+  background-color: $red;
+  border-radius: 100%;
+
+}
+
+.mat-mini-fab:not([class*=mat-elevation-z]) {
+  box-shadow: none;
+}
+
+.para {
+  font-size: 15px;
+}
+
+.content {
+  min-height: 100vh;
+}
+
+@media only screen and (max-width: 610px) {
+  .search {
+    width: inherit;
+  }
+}
+
+.head {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+  max-width: 150px;
+}
+
+.selected{
+  background-color:rgb(28, 219, 200);
+  border-radius: 0px 23px 23px 0px
+}

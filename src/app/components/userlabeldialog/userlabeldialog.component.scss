@@ -1,0 +1,56 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+::ng-deep.mat-dialog-container {
+@include matDialog
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  opacity: 0.5;
+}
+
+.material-icons:hover {
+  opacity: 1;
+}
+
+.wrap {
+  @include wrap;
+}
+
+.label {
+  font-size: 19px
+}
+
+.unique {
+  @include unique;
+}
+
+.unique2 {
+  @include unique;
+}
+
+.hr {
+  margin: 0px
+}
+
+.createlabel {
+  display: flex;
+  justify-content: flex-end
+}
+
+.div5 {
+  outline: none
+}

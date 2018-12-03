@@ -1,0 +1,72 @@
+@import '../../../scss/mixin';
+@import '../../../scss/variable';
+
+.matcard {
+  width: auto;
+  border-radius: 10px;
+  margin-top: 0px;
+}
+
+.div4 {
+  @include textdiv(587px)
+}
+
+div:empty:before {
+  content: attr(data-text);
+  color: $gray
+}
+
+.take_note {
+  @include takenote
+}
+
+::ng-deep.mat-dialog-container {
+@include matDialog;
+}
+
+.input2 {
+  width: 90%;
+  border: 0px;
+  outline: none;
+}
+
+.mat_Icon {
+  @include mat_Icon
+}
+
+.svg_img {
+  @include _svgImage;
+}
+
+.icons {
+  @include mat_Icon
+}
+
+.colordiv {
+  background-color: $white
+}
+.content{
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-bottom: 0px
+}
+
+.mini-fab{
+  box-shadow: none;
+  margin-left: 2px;
+}
+
+::ng-deep.mat-dialog-container {
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+  display: block;
+  padding: 0px;
+  padding-top: 0px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  outline: 0;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  max-height: inherit;
+}

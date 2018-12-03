@@ -1,0 +1,23 @@
+<!-- this is take a note basic -->
+<div fxLayout="column">
+  <div fxFlex="30" fxLayout="row" *ngIf="spinner==true">
+    <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="0%" fxFlex.xs="0%"></div>
+    <div fxFlex.lg="60%" fxFlex.md="60%" fxFlex.sm="100%" fxFlex.xs="100%" class="addNote">
+
+      <!-- adding add notes selector to add new note -->
+      <app-add-notes class="add"></app-add-notes>
+
+    </div>
+    <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="0%" fxFlex.xs="0%"></div>
+  </div>
+
+  <div class="spinner" *ngIf="spinner==false"></div>
+
+  <div  fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout="row wrap" *ngIf="spinner==true">
+
+    <!-- adding all note selector to print the notes -->
+    <app-note-card [notes]="notes" (themeCol)="updateCard($event)" (updateChipInCard)="chipUpdate($event)" (updateCard)="updateCard($event)"></app-note-card>
+
+  </div>
+
+</div>

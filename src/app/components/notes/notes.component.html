@@ -1,0 +1,29 @@
+<!-- this is take a note basic -->
+<div fxLayout="column">
+  <div fxFlex="30" fxLayout="row"  >
+    <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="0%" fxFlex.xs="0%"></div>
+    <div fxFlex.lg="60%" fxFlex.md="60%" fxFlex.sm="100%" fxFlex.xs="100%" class="addNote">
+
+      <!-- adding add notes selector to add new note -->
+      <app-add-notes class="add" (onAdding)=refresh($event) *ngIf="scanner==true"></app-add-notes>
+
+    </div>
+    <div fxFlex.lg="20%" fxFlex.md="20%" fxFlex.sm="0%" fxFlex.xs="0%"></div>
+  </div>
+
+  <div class="sk-folding-cube spinner" *ngIf="scanner==false">
+    <div class="sk-cube1 sk-cube"></div>
+    <div class="sk-cube2 sk-cube"></div>
+    <div class="sk-cube4 sk-cube"></div>
+    <div class="sk-cube3 sk-cube"></div>
+  </div>
+
+  <div fxFlex="70" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px" fxLayout="row wrap">
+    <div *ngIf="pinNotes.length>0"><b>Pinned</b></div>
+    <app-note-card *ngIf="pinNotes && scanner==true" [notes]="pinNotes" (updateCard)="updateCard($event)" (themeCol)="updateCard($event)"
+      (archivenote)="archivenote($event)" (updatepin)="updatepin()" (updateChipInCard)="chipUpdate($event)" class="pin"></app-note-card>
+    <div *ngIf="pinNotes.length>0 && scanner==true"><b>Others</b></div>
+    <app-note-card *ngIf="unPinNotes" [notes]="unPinNotes" (updateCard)="updateCard($event)" (themeCol)="updateCard($event)"
+      (archivenote)="archivenote($event)" (updatepin)="updatepin()" (updateChipInCard)="chipUpdate($event)"></app-note-card>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* @import '~ngx-bar-rating/themes/br-default-theme.css'; */
+@import '/home/bridgeit/Documents/workspace_copy/fundoo/node_modules/ngx-bar-rating/themes/br-fontawesome-o-theme.css';
+

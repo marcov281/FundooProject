@@ -1,0 +1,42 @@
+<!-- this is the icon of more -->
+<!-- <button mat-icon-button   > -->
+    <i class="material-icons icon" [matMenuTriggerFor]="menu" matTooltip="more"> more_vert </i> 
+<!-- </button> -->
+
+<!-- this is the menu that will come after clicking icon -->
+<mat-menu #menu="matMenu" >
+    <button mat-menu-item (click)="delete()">Delete note</button>
+    <button mat-menu-item [matMenuTriggerFor]="label" 
+    (click)="$event.stopPropagation()">
+    Add label</button> 
+    <button mat-menu-item *ngIf="note!=undefined && note.questionAndAnswerNotes.length==0" 
+    (click)="goToQa()">Ask Question</button>
+    <button mat-menu-item *ngIf="note!=undefined && note.questionAndAnswerNotes.length>0" 
+    (click)="goToQa()">View Question</button>
+    <button mat-menu-item *ngIf="note!=undefined && note.noteCheckLists.length!=0 
+    && change==true" (click)="optionChange(note)">Hide checkbox</button>
+    <button mat-menu-item *ngIf="change==false" 
+    (click)="optionChange(note)">Show checkbox</button>
+    <button mat-menu-item *ngIf="note==undefined && change==true" 
+    (click)="changeToDescription()">Hide checkbox</button>
+</mat-menu>
+
+<!-- this is the list of label that will come after clicking the label -->
+<mat-menu #label="matMenu">
+<div fxLayout="column" class="maindiv2"  (click)="$event.stopPropagation()">
+    <div fxflex=10 class="labellist"  >
+    Label Note</div>
+    <div fxflex=15 ><input class="input" [(ngModel)]="searchText" type="text"
+    placeholder="Enter label name"/><button mat-icon-button>
+    <img src="../../../assets/icons/search.svg"></button></div>
+    <div fxflex=75 fxLayout="column" *ngFor="let label of labellist 
+    | searchLabel: searchText"
+    class="list2" (click)="$event.stopPropagation()">
+
+    <button class="wrap" mat-menu-item >
+    <mat-checkbox class="box" [ngModel]="label.isChecked==true" 
+    (click)="check(label)">
+    </mat-checkbox>{{label.label}}</button>
+    </div>
+    </div>
+</mat-menu>

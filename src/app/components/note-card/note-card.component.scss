@@ -1,0 +1,106 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.div2 {
+  @include textdiv(200px);
+  word-wrap: break-word;
+  margin-right: 0px
+}
+
+div:empty:before {
+  content: attr(data-text);
+  color: $gray
+}
+
+.card_note {
+  @include width(300px);
+  border-radius: 10px;
+}
+
+
+.card_note:hover .action {
+  opacity: 1;
+}
+
+.action {
+  opacity: 0;
+  ;
+}
+
+.card_note:hover .pin {
+  display: block;
+}
+
+.pin {
+  opacity: 0;
+}
+
+
+@media only screen and (max-width: 320px) {
+  .card_note {
+    @include card_note(1%, 315px)
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .card_note {
+    @include card_note(1%, 365px)
+  }
+}
+
+@media only screen and (max-width: 411px) {
+  .card_note {
+    @include card_note(1%, 405px)
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .card_note {
+    @include card_note(1%, 410px)
+  }
+}
+
+.matCard {
+  margin: 1%;
+  margin-left: 13px;
+  height: min-content;
+  position: relative;
+}
+
+.icon {
+  opacity: 0.5;
+  cursor:pointer;
+}
+
+.grid {
+  @include width(700px)
+}
+
+.containdiv {
+  display: flex;
+  justify-content: center
+}
+
+.actionlist {
+  display: flex;
+}
+
+.wraping {
+  @include wrap;
+}
+
+.width {
+  max-width: 100px;
+}
+.mini-fab{
+  box-shadow: none;
+  margin-left: 2px;
+}
+.take_note{
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+::ng-deep.mat-card-header-text{
+margin: 0px !important;
+}

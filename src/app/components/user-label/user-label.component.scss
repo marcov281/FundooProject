@@ -1,0 +1,28 @@
+@import '../../../scss/_mixin.scss';
+@import '../../../scss/_variable.scss';
+
+.img {
+  margin-right: 20px;
+}
+
+.mat-stroked-button {
+  border: 0px;
+  line-height: 58px;
+  @include width(270px);
+  background-color: $grey;
+  text-align: left;
+  font-weight: 400;
+}
+
+.wrap {
+  @include wrap;
+}
+
+.butt1 {
+  float: right;
+}
+.selected{
+  background-color:rgb(28, 219, 200);
+  border-radius: 0px 23px 23px 0px
+}
+

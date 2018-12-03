@@ -1,0 +1,188 @@
+<div class="container" fxLayout="row" fxLayoutAlign="center center">
+  <div fxFlex.lg="900px" fxFlex.xl="1200px" fxFlex.md="800px" fxFlex.sm="96%" fxFlex.xs="96%" >
+    <!-- this is to start the title des and question part -->
+    <div class="maindiv">
+      <div class="topDiv " fxLayout="row">
+        <div fxFlex="90%" fxLayoutGap="5px" fxLayout="column">
+          <div fxFlex="50%" class="title" [innerHTML]='note.title'></div>
+          <div fxFlex="50%" *ngIf="note.noteCheckLists.length==0" [innerHTML]='note.description'></div>
+
+          <div *ngIf="note.noteCheckLists.length>0" class="checklist">
+            <div *ngFor="let data of note.noteCheckLists" fxLayout="column">
+              <div *ngIf="data.isDeleted==false && data.status=='close'">
+                <mat-checkbox [ngModel]="true"></mat-checkbox>
+                <s fxFlex=80% [innerHTML]="data.itemName"></s>
+              </div>
+              <div *ngIf="data.isDeleted==false && data.status=='open'">
+                <mat-checkbox [ngModel]="false"></mat-checkbox>
+                <div fxFlex=80% [innerHTML]="data.itemName"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="10%" fxLayoutAlign="center start">
+          <button mat-button routerLink='/home'>Close</button></div>
+      </div>
+      <mat-divider class="divider"></mat-divider>
+      <div fxLayout="column">
+        <div fxflex="50%" class="question" *ngIf="note.questionAndAnswerNotes.length==0">
+          Ask a Question??</div>
+        <div fxflex="50%" class="question" *ngIf="note.questionAndAnswerNotes.length>0">
+          Question Asked</div>
+        <div fxflex="50%">
+          <mat-form-field class="example-full-width formfield" 
+          *ngIf="note.questionAndAnswerNotes.length==0">
+            <input matInput placeholder="Enter question??" autocomplete="off" 
+            [(ngModel)]="inputMessage" (keydown)="question($event)">
+          </mat-form-field>
+          <mat-form-field class="example-full-width formfield" 
+          *ngIf="note.questionAndAnswerNotes.length>0">
+            <input matInput autocomplete="off" placeholder="Enter question??" 
+            [ngModel]="qaObject.message" disabled (keydown)="question($event)">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+      <!-- this is to end of the title des and question part -->
+      <!-- this is the starting of the question part -->
+      <div class="replySection">
+
+      <div fxLayout="row wrap" *ngIf="note.questionAndAnswerNotes.length>0">
+       
+        <div fxFlex.lg="65%" fxLayout="row">
+        <div fxFlex.lg="10%" fxFlex.xs="10%" fxFlex.sm="10%" fxFlex.md="10%">
+          <button mat-mini-fab class="miniFab" [ngStyle]="{'background-image':
+              'url(' +imagePath+ ')','background-size':'cover'}">
+          </button>
+        </div>
+
+        <div fxFlex.lg="90%" fxLayout="column">
+          <div fxFlex="30%" class="username">{{qaObject.user.firstName}} {{qaObject.user.lastName}}
+            <span class="date">{{qaObject.createdDate|date:"medium"}}</span></div>
+          <div fxFlex="70%" class="question" >
+            <div >{{qaObject.message}}</div>
+          </div>
+        </div>
+      </div>
+
+        <div fxFlex.lg="35%" fxLayoutAlign="end center" fxLayout="row" 
+        fxLayoutGap=10px class="list">
+          <i class="material-icons icon" (click)="matInput=!matInput">reply </i>
+          <i class="material-icons icon" *ngIf="!likeValue" 
+          (click)="likeQuestion('false')">thumb_up</i>
+          <i class="material-icons liked" *ngIf="likeValue" 
+          (click)="likeQuestion('true')">thumb_up</i>
+          <span class="username">{{count}} likes</span>
+          <bar-rating [(rate)]="rate" [theme]="'fontawesome-o'" 
+          fxLayoutAlign="end center" [max]="5" (rateChange)="changeRating($event)">
+          </bar-rating>
+          <span class="username">({{avgRating}})</span>
+        </div>
+
+      </div>
+      <!-- this is the ending the the question part -->
+    <!-- this is the starting of  the reply input part -->
+    <div fxLayout="row" *ngIf="matInput==true" >
+      <div fxFlex="5%"></div>
+      <div fxFlex="95%" fxLayout="row" fxLayoutGap="5px">
+        <div fxFlex="5%"><button mat-mini-fab class="miniFab mini" [ngStyle]="{'background-image':
+          'url(' +replyImageUrl+ ')','background-size':'cover'}"></button></div>
+        <div fxFlex="85%">
+          <mat-form-field class="example-full-width formfield">
+            <input matInput autocomplete="off" placeholder="Write your comment" 
+            [(ngModel)]="inputReply">
+          </mat-form-field>
+        </div>
+        <div fxFlex="10%"><button mat-button (click)="replyToQuestion()">Reply</button></div>
+      </div>
+    </div>
+    <!-- this is the ending of  the reply input part -->
+
+    <!-- this is the starting of the 1st label of reply part -->
+    <div *ngFor="let reply of replyArray" fxLayoutGap="10px">
+      <div fxLayout="row wrap" *ngIf="replyArray.length>0" class="reply">
+        <div fxFlex="5%"></div>
+
+        <div fxFlex="5%"><button mat-mini-fab class="miniFab mini" [ngStyle]="{'background-image':
+          'url(' +'http://34.213.106.173/'+reply.user.imageUrl +')','background-size':'cover'}"></button>
+        </div>
+
+        <div fxFlex="50%" fxLayout="column">
+          <div fxFlex="30%" class="username" fxLayoutAlign="start center">{{reply.user.firstName}}
+            {{reply.user.lastName}}
+            <span class="date">{{reply.createdDate|date:"medium"}}</span></div>
+          <div fxFlex="70%" fxLayoutAlign="start center">{{reply.message}}</div>
+        </div>
+     
+        <div fxFlex="38%" fxLayoutAlign="end end" fxLayout="row wrap" fxLayoutGap=10px>
+          <i matTooltip="reply" class="material-icons icon" (click)="replyInput(reply.id)">reply </i>
+          <span class="username">{{likeCountInReply(reply)}} likes</span>
+          <i class="material-icons icon" *ngIf="checkLike(reply)==false" 
+          (click)="likeReply('false',reply)">thumb_up</i>
+          <i class="material-icons liked" *ngIf="checkLike(reply)==true" 
+          (click)="likeReply('true',reply)">thumb_up</i>
+          <bar-rating [theme]="'fontawesome-o'" fxLayoutAlign="end center" 
+          *ngIf="replyRating(reply.rate)" [max]="5"
+            class="rating" (rateChange)="changeRatingToReply($event,reply.id)" 
+            [(rate)]="rateOfReply"></bar-rating>
+          <span class="username" *ngIf="checkRateInReply(reply)">({{replyAvgRate}})</span>
+          <i class="material-icons icon" (click)="getreplyOfReply(reply)">keyboard_arrow_down </i>
+
+
+        </div>
+
+      </div>
+      <!-- =========================================================================================== -->
+      <div fxLayout="row" class="inputDiv" *ngIf="hideInputReply==reply.id">
+        <div fxFlex="10%"></div>
+        <div fxFlex="90%" fxLayout="row" fxLayoutGap="5px">
+          <div fxFlex="5%"><button mat-mini-fab class="miniFab mini" [ngStyle]="{'background-image':
+        'url(' +replyImageUrl+ ')','background-size':'cover'}"></button></div>
+          <div fxFlex="85%">
+            <mat-form-field class="example-full-width formfield">
+              <input matInput placeholder="Write your comment" autocomplete="off" 
+              [(ngModel)]="inputReplyLabel2">
+            </mat-form-field>
+          </div>
+          <div fxFlex="10%"><button mat-button (click)="replyToReply(reply)">Reply</button></div>
+        </div>
+      </div>
+
+      <!-- ======================================================================================= -->
+
+      <div  *ngFor="let data of replyOfReplyArray">
+        <div fxLayout="row wrap"  class="reply" *ngIf="replyOfReplyArray.length>0 && 
+          reply2ndLabel==true && replyId==reply.id">
+          <div fxFlex="10%"></div>
+          <div fxFlex="5%"><button mat-mini-fab class="miniFab mini" [ngStyle]="{'background-image':
+        'url(' +'http://34.213.106.173/'+data.user.imageUrl +')','background-size':'cover'}"></button>
+          </div>
+          <div fxFlex="55%" fxLayout="column">
+            <div fxFlex="30%" class="username" fxLayoutAlign="start center">{{data.user.firstName}}
+              {{data.user.lastName}}
+              <span class="date">{{data.createdDate|date:"medium"}}</span></div>
+            <div fxFlex="70%" fxLayoutAlign="start center">{{data.message}}</div>
+          </div>
+          <div fxFlex="29%" fxLayoutAlign="start end" fxLayout="row wrap" fxLayoutGap=10px>
+            <!-- <i matTooltip="reply" class="material-icons icon" (click)="replyInput(reply.id)">reply </i> -->
+            <span class="username">{{likeCountInReply(data)}} likes</span>
+            <i class="material-icons icon" *ngIf="checkLike(data)==false" 
+            (click)="likeReply('false',data)">thumb_up</i>
+            <i class="material-icons liked" *ngIf="checkLike(data)==true" 
+            (click)="likeReply('true',data)">thumb_up</i>
+            <bar-rating [theme]="'fontawesome-o'" fxLayoutAlign="end center" 
+            *ngIf="replyRating(data.rate)" [max]="5"
+              class="rating" (rateChange)="changeRatingToReply($event,data.id)" 
+              [(rate)]="rateOfReply"></bar-rating>
+            <span class="username" *ngIf="checkRateInReply(data)">({{replyAvgRate}})</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+    <!-- ===================================================================================== -->
+    <!-- this is the ending of the 1st label of reply part -->
+  </div>
+
+</div>
